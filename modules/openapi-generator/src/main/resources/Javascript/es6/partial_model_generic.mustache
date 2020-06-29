@@ -48,6 +48,14 @@ class {{classname}} {{#parent}}{{^parentModel}}{{#vendorExtensions.x-is-array}}e
             {{#vars}}
             if (data.hasOwnProperty('{{baseName}}')) {
                 obj['{{baseName}}']{{{defaultValueWithParam}}}
+
+                if ('{{baseName}}' !== '{{name}}') {
+                  Object.defineProperty(obj, '{{name}}', {
+                    get() {
+                      return obj['{{baseName}}'];
+                    }
+                  });
+                }
             }
             {{/vars}}
         }
