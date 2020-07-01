@@ -482,14 +482,14 @@ conf = {{{packageName}}}.Configuration(
         auth = {}
 {{#authMethods}}
 {{#isApiKey}}
-        if '{{name}}' in self.api_key{{#vendorExtensions.x-auth-id-alias}} or '{{.}}' in self.api_key{{/vendorExtensions.x-auth-id-alias}}:
+        if '{{name}}' in self.api_key{{#vendorExtensions.x-auth-id-alias}} or '{{keyParamName}}' in self.api_key{{/vendorExtensions.x-auth-id-alias}}:
             auth['{{name}}'] = {
                 'type': 'api_key',
                 'in': {{#isKeyInCookie}}'cookie'{{/isKeyInCookie}}{{#isKeyInHeader}}'header'{{/isKeyInHeader}}{{#isKeyInQuery}}'query'{{/isKeyInQuery}},
                 'key': '{{keyParamName}}',
                 'value': self.get_api_key_with_prefix(
                     '{{name}}',{{#vendorExtensions.x-auth-id-alias}}
-                    alias='{{.}}',{{/vendorExtensions.x-auth-id-alias}}
+                    alias='{{keyParamName}}',{{/vendorExtensions.x-auth-id-alias}}
                 ),
             }
 {{/isApiKey}}
